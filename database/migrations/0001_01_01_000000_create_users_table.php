@@ -22,7 +22,6 @@ return new class extends Migration
             $table->tinyInteger('is_active')->default(1)->comment('0=>In Active, 1 => Active');
             $table->rememberToken();
             $table->text('address')->nullable();
-            $table->unsignedBigInteger('team_id')->unique()->nullable();
             $table->timestamps();
         });
 

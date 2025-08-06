@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
-use App\Models\Team;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -17,17 +16,14 @@ class UserController extends Controller
     public function index(Request $request): Response
     {
         $query = User::query()
-            ->with('team:id,name')
+            ->with('team')
             ->whereNot('role', '=', 'admin');
-
+        // dd
         if ($request->has('search')) {
             $search = $request->search;
             $query->where(function ($subQuery) use ($search) {
                 $subQuery->whereLike('name', "%$search%")
                     ->orwhereLike('email', "%$search%")
-                    ->orWhereRelation('team', function ($q) use ($search) {
-                        $q->whereLike('name', "%$search%");
-                    })
                     ->orWhereLike('is_active', $search == 'active' ? 1 : ($search == 'inactive' ? 0 : null));
             });
         }
@@ -42,14 +38,7 @@ class UserController extends Controller
 
     public function create(): Response
     {
-        $teams = Team::query()
-            ->whereDoesntHave('user')
-            ->get()
-            ->pluck('name', 'id');
-
-        return Inertia::render('User/Create', [
-            'teams' => $teams,
-        ]);
+        return Inertia::render('User/Create');
     }
 
     public function save(UserRequest $request): RedirectResponse
@@ -67,15 +56,8 @@ class UserController extends Controller
 
     public function edit(User $user): Response
     {
-        $teams = Team::query()
-            ->whereDoesntHave('user')
-            ->get()
-            ->pluck('name', 'id');
-        $user->load('team:id,name');
-
         return Inertia::render('User/Create', [
             'userData' => $user,
-            'teams' => $teams,
         ]);
     }
 
@@ -96,6 +78,10 @@ class UserController extends Controller
 
     public function delete(User $user): RedirectResponse
     {
+        $user->load('team');
+        if ($user->team) {
+            return redirect()->back()->with('error', 'User is assigned to a team and cannot be deleted.');
+        }
         try {
             if ($user->delete()) {
                 return redirect()->back()->with('success', 'User Deleted Succefully');

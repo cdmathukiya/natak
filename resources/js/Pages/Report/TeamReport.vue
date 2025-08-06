@@ -97,7 +97,7 @@
                                         </td>
                                         <td class="p-1 border border-gray-100 dark:border-white/[0.05]">
                                             <p class="text-gray-700 dark:text-white">
-                                                {{ member.is_available ? 'Available' : 'Not Available' }}
+                                                {{ member.is_available ? 'Yes' : 'No' }}
                                             </p>
                                         </td>
                                     </tr>

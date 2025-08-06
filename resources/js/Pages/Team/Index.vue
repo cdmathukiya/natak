@@ -60,6 +60,11 @@
                                 </td>
                                 <td class="px-4 py-3 border border-gray-100 dark:border-white/[0.05]">
                                     <span class="block font-medium text-gray-800 text-theme-sm dark:text-white/90">
+                                        {{ team.user?.name }}
+                                    </span>
+                                </td>
+                                <td class="px-4 py-3 border border-gray-100 dark:border-white/[0.05]">
+                                    <span class="block font-medium text-gray-800 text-theme-sm dark:text-white/90">
                                         {{ team.kendra }}
                                     </span>
                                 </td>
@@ -130,6 +135,7 @@ export default {
             columns: [
                 { key: 'id', label: 'Id' },
                 { key: 'name', label: 'Name' },
+                { key: 'user_id', label: 'User' },
                 { key: 'kendra', label: 'Kendra' },
                 { key: 'Action', label: 'Action' },
             ],

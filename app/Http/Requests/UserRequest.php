@@ -30,7 +30,6 @@ class UserRequest extends FormRequest
             'phone' => ['nullable', 'string', 'max:255'],
             'is_active' => ['required', 'boolean'],
             'address' => ['nullable', 'string'],
-            'team_id' => ['required', 'numeric', 'unique:users,team_id'],
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
@@ -39,20 +38,9 @@ class UserRequest extends FormRequest
                 'required', 'email', 'max:50',
                 Rule::unique(User::class)->ignore($user),
             ];
-            $rules['team_id'] = [
-                'required', 'numeric',
-                Rule::unique(User::class)->ignore($user),
-            ];
             $rules['password'] = ['sometimes', 'nullable', 'string', 'min:8', 'max:255'];
         }
 
         return $rules;
-    }
-
-    public function messages()
-    {
-        return [
-            'team_id.unique' => 'Team already assigned to other user.',
-        ];
     }
 }

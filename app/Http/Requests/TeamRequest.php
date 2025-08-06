@@ -26,6 +26,7 @@ class TeamRequest extends FormRequest
         $rules = [
             'name' => ['required', 'string', 'max:255', 'unique:teams'],
             'kendra' => ['required', 'string', 'max:255'],
+            'user_id' => ['required', 'numeric', 'unique:teams,user_id'],
             'members' => ['required', 'array'],
             'members.*' => ['required', 'array'],
             'members.*.name' => ['required', 'string', 'max:255'],
@@ -36,6 +37,10 @@ class TeamRequest extends FormRequest
             $team = $this->route('team');
             $rules['name'] = [
                 'required', 'string', 'max:255', Rule::unique(Team::class)->ignore($team),
+            ];
+            $rules['user_id'] = [
+                'required', 'numeric',
+                Rule::unique(Team::class)->ignore($team),
             ];
         }
 
@@ -54,6 +59,7 @@ class TeamRequest extends FormRequest
     {
         return [
             'members.required' => 'Please add at least one member.',
+            'user_id.unique' => 'User already assigned to other team.',
         ];
     }
 }

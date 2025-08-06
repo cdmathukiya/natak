@@ -40,18 +40,8 @@
                         </li>
                         <!-- Menu Item Dashboard -->
 
+                        
                         <template v-if="$page.props.auth.user.role == 'admin'">
-                            <!-- Menu Item Team -->
-                            <li>
-                                <Link :href="route('teams')" class="menu-item group" :class="isActiveRoute(route('teams')) ? 'menu-item-active' : 'menu-item-inactive'">
-                                    <i class="fa-solid fa-people-group text-xl"></i>
-                                    <span class="menu-item-text" :class="sidebarToggle ? 'lg:hidden' : ''">
-                                        Team
-                                    </span>
-                                </Link>
-                            </li>
-                            <!-- Menu Item Team -->
-    
                             <!-- Menu Item User -->
                             <li>
                                 <Link :href="route('users')" class="menu-item group" :class="isActiveRoute(route('users')) ? 'menu-item-active' : 'menu-item-inactive'">
@@ -62,6 +52,17 @@
                                 </Link>
                             </li>
                             <!-- Menu Item User -->
+
+                            <!-- Menu Item Team -->
+                            <li>
+                                <Link :href="route('teams')" class="menu-item group" :class="isActiveRoute(route('teams')) ? 'menu-item-active' : 'menu-item-inactive'">
+                                    <i class="fa-solid fa-people-group text-xl"></i>
+                                    <span class="menu-item-text" :class="sidebarToggle ? 'lg:hidden' : ''">
+                                        Team
+                                    </span>
+                                </Link>
+                            </li>
+                            <!-- Menu Item Team -->
                         </template>
 
                         <!-- Menu Item User -->

@@ -67,7 +67,7 @@
                                                     <div :class="form.members[index].is_available ? 'bg-brand-500 dark:bg-brand-500' : 'bg-gray-200 dark:bg-white/10'" class="block h-6 w-11 rounded-full"></div>
                                                     <div :class="form.members[index].is_available ? 'translate-x-full rtl:-translate-x-full' : 'translate-x-0'" class="shadow-theme-sm absolute top-0.5 left-0.5 h-5 w-5 rounded-full bg-white duration-300 ease-linear"></div>
                                                 </div>
-                                                {{ form.members[index].is_available ? 'Available' : 'Not Available' }}
+                                                {{ form.members[index].is_available ? 'Yes' : 'No' }}
                                             </label>
                                         </p>
                                         <p v-if="form.errors?.[`members.${index}.is_available`]" class="text-theme-xs text-error-500 mt-1.5">
