@@ -26,10 +26,8 @@ class ReportController extends Controller
             $toDate = Carbon::parse($request->get('to_date'))->format('Y-m-d');
         }
 
-        // dd($request->team_id);
-
         $teamAvailables = TeamAvailable::query()
-            ->with(['members', 'team.user'])
+            ->with(['members', 'team.user', 'spots'])
             ->when($request->team_id, function ($q) use ($request) {
                 $q->where('team_id', $request->team_id);
             });
@@ -43,7 +41,6 @@ class ReportController extends Controller
         }
 
         $teamAvailables = $teamAvailables->get();
-        // dd($teamAvailables->toArray());
 
         $date = [
             'from_date' => $fromDate,

@@ -19,4 +19,9 @@ class TeamAvailable extends Model
     {
         return $this->hasMany(TeamAvailableMember::class, 'team_available_id', 'id');
     }
+
+    public function spots(): HasMany
+    {
+        return $this->hasMany(TeamSpots::class, 'team_available_id', 'id');
+    }
 }

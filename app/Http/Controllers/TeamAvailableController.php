@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateSpotsItemRequest;
 use App\Http\Requests\TeamAvailableRequest;
 use App\Models\Team;
 use App\Models\TeamAvailable;
 use App\Models\TeamAvailableMember;
+use App\Models\TeamSpots;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -96,12 +99,12 @@ class TeamAvailableController extends Controller
 
         TeamAvailableMember::insert($members);
 
-        return redirect()->route('team_availables')->with('success', 'Data saved successfully');
+        return redirect()->route('team_available.edit', $teamAvailable->id)->with('success', 'Data saved successfully');
     }
 
     public function show(TeamAvailable $teamAvailable): Response
     {
-        $teamAvailable->load(['team.user', 'members']);
+        $teamAvailable->load(['team.user', 'members', 'spots']);
 
         return Inertia::render('TeamAvailable/Show', [
             'teamAvailable' => $teamAvailable,
@@ -110,7 +113,7 @@ class TeamAvailableController extends Controller
 
     public function edit(TeamAvailable $teamAvailable): Response
     {
-        $teamAvailable->load(['team.user', 'members']);
+        $teamAvailable->load(['team.user', 'members', 'spots']);
 
         return Inertia::render('TeamAvailable/Create', [
             'is_edit' => true,
@@ -157,5 +160,21 @@ class TeamAvailableController extends Controller
 
             return redirect()->back()->with('error', $message);
         }
+    }
+
+    public function spotsItemSave(CreateSpotsItemRequest $request)
+    {
+        $inputs = $request->validated();
+        $spots = $inputs['spots'];
+
+        foreach ($spots as $key => $value) {
+            $spots[$key]['team_available_id'] = $inputs['team_available_id'];
+            $spots[$key]['date'] = $inputs['date'];
+            $spots[$key]['created_at'] = now();
+            $spots[$key]['updated_at'] = now();
+        }
+        TeamSpots::insert($spots);
+
+        return redirect()->route('team_availables')->with('success', 'Data saved successfully');
     }
 }

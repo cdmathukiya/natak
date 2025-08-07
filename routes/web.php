@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function () {
         Route::get('create', [TeamController::class, 'create'])->name('team.create');
         Route::post('save', [TeamController::class, 'save'])->name('team.save');
         Route::get('{team}/edit', [TeamController::class, 'edit'])->name('team.edit');
+        Route::get('{team}/show', [TeamController::class, 'show'])->name('team.show');
         Route::put('{team}/update', [TeamController::class, 'update'])->name('team.update');
         Route::delete('{team}/delete', [TeamController::class, 'delete'])->name('team.delete');
     });
@@ -35,6 +36,7 @@ Route::middleware('auth')->group(function () {
         Route::put('{teamAvailable}/update', [TeamAvailableController::class, 'update'])->name('team_available.update');
         Route::delete('{teamAvailable}/delete', [TeamAvailableController::class, 'delete'])->name('team_available.delete');
         route::get('get-team-details', [TeamAvailableController::class, 'getTeamDetails'])->name('get_team_details');
+        route::post('save/spots-item', [TeamAvailableController::class, 'spotsItemSave'])->name('team_available.spots_item.save');
     });
 
     Route::prefix('a_report')->group(function () {

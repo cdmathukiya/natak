@@ -105,6 +105,7 @@
             </div>
         </div>
     </div>
+    <TeamSpotsItem v-if="teamAvailable?.id" :spots="teamAvailable?.spots"  :team-available-id="teamAvailable?.id" :date="teamAvailable?.date" />
 </template>
 
 <script>
@@ -112,6 +113,7 @@ import { Head, router } from "@inertiajs/vue3";
 import Layout from "@/Layout/MainLayout.vue";
 import Breadcrum from "@/Components/Breadcrum.vue";
 import axios from "axios";
+import TeamSpotsItem from "./TeamSpotsItem.vue";
 
 export default {
     layout: Layout,
@@ -124,6 +126,7 @@ export default {
     components: {
         Head,
         Breadcrum,
+        TeamSpotsItem
     },
     data() {
         return {
@@ -139,15 +142,11 @@ export default {
             },
             team: this.teamAvailable?.team || [],
             memberIndex: null,
-            today: new Date().toISOString().split('T')[0]
+            today: new Date().toISOString().split('T')[0],
         }
-    },
-    mounted() {
-        this.getTeamDetails()
     },
     methods : {
         submit() {
-            console.log(this.form.members)
             let url = route('team_available.save');
             if(this.teamAvailable?.id) {
                 url = route('team_available.update', this.teamAvailable.id);
@@ -179,8 +178,7 @@ export default {
                 this.team = [];
                 this.form.members = [];
             }
-        },  
+        },
     }
 }
-
 </script>

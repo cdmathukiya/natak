@@ -68,41 +68,87 @@
                                 </span>
                             </div>
                         </summary>
-                        <div class="py-2 gap-y-2 flex flex-wrap dark:border-gray-800 m-2">
-                            <table class="min-w-full">
-                                <thead>
-                                    <tr class="border-t border-gray-100 dark:border-white/[0.05] text-left">
-                                        <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300">Sr No</th>
-                                        <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300">Name</th>
-                                        <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300">Role</th>
-                                        <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300">Available</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="(member, index) in teamAvailable.members" class="border-t border-gray-100 dark:border-white/[0.05]">
-                                        <td class="p-1 border border-gray-100 dark:border-white/[0.05]">
-                                            <p class="text-gray-700 dark:text-white">
-                                                {{ index + 1 }}
-                                            </p>
-                                        </td>
-                                        <td class="p-1 border border-gray-100 dark:border-white/[0.05]">
-                                            <p class="text-gray-700 dark:text-white">
-                                                {{ member.name }}
-                                            </p>
-                                        </td>
-                                        <td class="p-1 border border-gray-100 dark:border-white/[0.05]">
-                                            <p class="text-gray-700 dark:text-white">
-                                                {{ member.role }}
-                                            </p>
-                                        </td>
-                                        <td class="p-1 border border-gray-100 dark:border-white/[0.05]">
-                                            <p class="text-gray-700 dark:text-white">
-                                                {{ member.is_available ? 'Yes' : 'No' }}
-                                            </p>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="py-2 gap-y-2 flex flex-wrap dark:border-gray-800 m-2 grid grid-cols-12 gap-4">
+                            <div class="col-span-4">
+                                <h2 class="text-xl mx-2.5 font-semibold text-gray-800 dark:text-white/90 w-full my-2">Team Members</h2>
+                                <table class="min-w-full">
+                                    <thead>
+                                        <tr class="border-t border-gray-100 dark:border-white/[0.05] text-left">
+                                            <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300">Sr No</th>
+                                            <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300">Name</th>
+                                            <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300">Role</th>
+                                            <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300">Available</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="(member, index) in teamAvailable.members" class="border-t border-gray-100 dark:border-white/[0.05]">
+                                            <td class="p-1 border border-gray-100 dark:border-white/[0.05]">
+                                                <p class="text-gray-700 dark:text-white">
+                                                    {{ index + 1 }}
+                                                </p>
+                                            </td>
+                                            <td class="p-1 border border-gray-100 dark:border-white/[0.05]">
+                                                <p class="text-gray-700 dark:text-white">
+                                                    {{ member.name }}
+                                                </p>
+                                            </td>
+                                            <td class="p-1 border border-gray-100 dark:border-white/[0.05]">
+                                                <p class="text-gray-700 dark:text-white">
+                                                    {{ member.role }}
+                                                </p>
+                                            </td>
+                                            <td class="p-1 border border-gray-100 dark:border-white/[0.05]">
+                                                <p class="text-gray-700 dark:text-white">
+                                                    {{ member.is_available ? 'Yes' : 'No' }}
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-span-8" v-if="teamAvailable?.spots?.length > 0">
+                                <h2 class="text-xl mx-2.5 font-semibold text-gray-800 dark:text-white/90 w-full my-2">Spots</h2>
+                                <table class="min-w-full">
+                                    <thead>
+                                        <tr class="border-t border-gray-100 dark:border-white/[0.05] text-left">
+                                            <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300">Sr No</th>
+                                            <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300">Spots Name</th>
+                                            <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300">Children</th>
+                                            <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300">Women</th>
+                                            <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300">Men</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="(spot, index) in teamAvailable.spots" class="border-t border-gray-100 dark:border-white/[0.05]">
+                                            <td class="p-1 border border-gray-100 dark:border-white/[0.05]">
+                                                <p class="text-gray-700 dark:text-white">
+                                                    {{ index + 1 }}
+                                                </p>
+                                            </td>
+                                            <td class="p-1 border border-gray-100 dark:border-white/[0.05]">
+                                                <p class="text-gray-700 dark:text-white">
+                                                    {{ spot.spots_name }}
+                                                </p>
+                                            </td>
+                                            <td class="p-1 border border-gray-100 dark:border-white/[0.05]">
+                                                <p class="text-gray-700 dark:text-white">
+                                                    {{ spot.children }}
+                                                </p>
+                                            </td>
+                                            <td class="p-1 border border-gray-100 dark:border-white/[0.05]">
+                                                <p class="text-gray-700 dark:text-white">
+                                                    {{ spot.women }}
+                                                </p>
+                                            </td>
+                                            <td class="p-1 border border-gray-100 dark:border-white/[0.05]">
+                                                <p class="text-gray-700 dark:text-white">
+                                                    {{ spot.men }}
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </details>
                 </template>
@@ -126,7 +172,7 @@ export default {
     props: {
         teamAvailables:Object,
         teams: Object,
-        date: Array,
+        date: Object,
     },
     data() {
         return {

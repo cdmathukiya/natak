@@ -66,6 +66,15 @@ class TeamController extends Controller
         return redirect()->route('teams')->with('success', 'Team created successfully');
     }
 
+    public function show(Team $team): Response
+    {
+        $team->load(['members', 'user', 'teamAvailable.spots']);
+
+        return Inertia::render('Team/Show', [
+            'team' => $team,
+        ]);
+    }
+
     public function edit(Team $team): Response
     {
         $users = User::query()
