@@ -93,7 +93,9 @@
             </div>
         </div>
     </div>
-    <div class="py-5 px-1 space-y-6 bg-white dark:bg-white/[0.03] border border-gray-200 my-5 rounded-2xl dark:border-gray-800" v-if="teamAvailable?.spots?.length > 0">
+    <TeamSpotsItem v-if="teamAvailable?.id" :spots="teamAvailable?.spots"  :team-available-id="teamAvailable?.id" :date="teamAvailable?.date" />
+
+    <div class="py-5 px-1 space-y-6 bg-white dark:bg-white/[0.03] border border-gray-200 my-5 rounded-2xl dark:border-gray-800 hidden" v-if="teamAvailable?.spots?.length > 0">
         <h2 class="text-xl mx-2.5 font-semibold text-gray-800 dark:text-white/90 w-full my-2">Add Team Spots</h2>
         <table class="min-w-full my-3">
             <thead>
@@ -144,6 +146,7 @@ import { Head, router } from "@inertiajs/vue3";
 import Layout from "@/Layout/MainLayout.vue";
 import Breadcrum from "@/Components/Breadcrum.vue";
 import axios from "axios";
+import TeamSpotsItem from "@/Pages/TeamAvailable/TeamSpotsItem.vue";
 
 export default {
     layout: Layout,
@@ -152,6 +155,7 @@ export default {
         teamAvailable:Object,
     },
     components: {
+        TeamSpotsItem,
         Head,
         Breadcrum,
     },
@@ -203,7 +207,7 @@ export default {
                 this.team = [];
                 this.form.members = [];
             }
-        },  
+        },
     }
 }
 

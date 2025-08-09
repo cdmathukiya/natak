@@ -97,7 +97,7 @@
                                                     {{ member.role }}
                                                 </p>
                                             </td>
-                                            <td class="p-1 border border-gray-100 dark:border-white/[0.05]">
+                                            <td class="p-1 border border-gray-100 dark:border-white/[0.05]" :class="{ 'bg-red-500 text-white': !member.is_available }">
                                                 <p class="text-gray-700 dark:text-white">
                                                     {{ member.is_available ? 'Yes' : 'No' }}
                                                 </p>
@@ -214,7 +214,7 @@ export default {
             } else {
                 this.team = [];
             }
-        },  
+        },
     }
 }
 </script>

@@ -105,7 +105,6 @@
             </div>
         </div>
     </div>
-    <TeamSpotsItem v-if="teamAvailable?.id" :spots="teamAvailable?.spots"  :team-available-id="teamAvailable?.id" :date="teamAvailable?.date" />
 </template>
 
 <script>
