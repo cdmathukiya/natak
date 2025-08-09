@@ -42,8 +42,43 @@ class TeamController extends Controller
             ->where('role', 'user')
             ->pluck('name', 'id');
 
+        $members = [
+            [
+                'name' => 'jay',
+                'role' => 'HEMENDRA',
+            ], [
+                'name' => 'jay',
+                'role' => 'GAURANG',
+            ], [
+                'name' => 'jay',
+                'role' => 'MAHESH',
+            ], [
+                'name' => 'jay',
+                'role' => 'ARUN',
+            ], [
+                'name' => 'jay',
+                'role' => 'SHAILESH',
+            ], [
+                'name' => 'jay',
+                'role' => 'RAVI',
+            ], [
+                'name' => 'jay',
+                'role' => 'BHAVIN',
+            ], [
+                'name' => 'jay',
+                'role' => 'DHAVAL',
+            ], [
+                'name' => 'jay',
+                'role' => 'PARAG',
+            ], [
+                'name' => 'jay',
+                'role' => 'LALIT',
+            ],
+        ];
+
         return Inertia::render('Team/Create', [
             'users' => $users,
+            'members' => $members,
         ]);
     }
 

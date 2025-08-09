@@ -146,6 +146,7 @@ export default {
     props: {
         team: Object,
         users: Object,
+        members: Object,
     },
     components: {
         Head,
@@ -153,6 +154,13 @@ export default {
         DeleteAlert,
     },
     data() {
+        var members = [];
+        if (this.team) {
+            members = this.team?.members ?? [];
+        } else {
+            members = this.members;
+        }
+        console.log(members);
         return {
             breadcrum: {
                 currentPage: 'Team',
@@ -163,7 +171,7 @@ export default {
                 name: this.team?.name ?? '',
                 kendra: this.team?.kendra ?? '',
                 user_id: this.team?.user_id ?? '',
-                members: this.team?.members ?? [],
+                members: members,
             },
             addMember: {
                 name: "",
