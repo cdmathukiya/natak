@@ -102,10 +102,8 @@
                 <div class="flex items-center justify-center z-1">
                     <!-- ===== Common Grid Shape Start ===== -->
                     <CommonGridShape />
-                    <div class="flex flex-col items-center max-w-xs">
-                        <a href="index.html" class="block mb-4">
-                            <img src="../../../Images/logo/auth-logo.svg" alt="Logo" />
-                        </a>
+                    <div class="flex flex-col items-center max-w-xs text-white">
+                        Street Play
                     </div>
                 </div>
             </div>
@@ -120,6 +118,13 @@
                     </svg>
                 </button>
             </div>
+            <button
+                v-if="showInstallButton"
+                @click="promptInstall"
+                class="fixed bottom-4 right-4 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl shadow-lg transition"
+            >
+                Install Now
+            </button>
         </div>
     </div>
     <!-- ===== Page Wrapper End ===== -->
@@ -142,7 +147,9 @@ export default {
             form: {
                 email: '',
                 password: '',
-            }
+            },
+            showInstallButton: false,
+            deferredPrompt: null
         }
     },
     methods: {
@@ -163,6 +170,20 @@ export default {
                 },
             });
         },
+        promptInstall() {
+            if (this.deferredPrompt) {
+                this.deferredPrompt.prompt();
+                this.deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('✅ User accepted PWA install');
+                    } else {
+                        console.log('❌ User dismissed PWA install');
+                    }
+                    this.showInstallButton = false;
+                    this.deferredPrompt = null;
+                });
+            }
+        },
     },
     mounted() {
         if (this.darkMode) {
@@ -171,6 +192,20 @@ export default {
         } else {
             document.body.classList.remove('dark');
             document.body.classList.remove('bg-gray-900');
+        }
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            this.deferredPrompt = e;
+            this.showInstallButton = true;
+        });
+
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('✅ SW registered:', reg))
+                    .catch(err => console.error('❌ SW failed:', err));
+            });
         }
     },
     watch: {
