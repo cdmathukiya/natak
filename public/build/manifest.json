@@ -1,0 +1,68 @@
+{
+  "node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.woff2": {
+    "file": "assets/fa-brands-400-DFY6gyJh.woff2",
+    "src": "node_modules/@fortawesome/fontawesome-free/webfonts/fa-brands-400.woff2"
+  },
+  "node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.woff2": {
+    "file": "assets/fa-regular-400-DdcaUAxu.woff2",
+    "src": "node_modules/@fortawesome/fontawesome-free/webfonts/fa-regular-400.woff2"
+  },
+  "node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.woff2": {
+    "file": "assets/fa-solid-900-BQpGBb1f.woff2",
+    "src": "node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.woff2"
+  },
+  "node_modules/@fortawesome/fontawesome-free/webfonts/fa-v4compatibility.woff2": {
+    "file": "assets/fa-v4compatibility-BHaDpj3C.woff2",
+    "src": "node_modules/@fortawesome/fontawesome-free/webfonts/fa-v4compatibility.woff2"
+  },
+  "resources/Images/logo/auth-logo.svg": {
+    "file": "assets/auth-logo-CqhENfDg.svg",
+    "src": "resources/Images/logo/auth-logo.svg"
+  },
+  "resources/Images/logo/logo-dark.svg": {
+    "file": "assets/logo-dark-B0_oIsjz.svg",
+    "src": "resources/Images/logo/logo-dark.svg"
+  },
+  "resources/Images/logo/logo-icon.svg": {
+    "file": "assets/logo-icon-PTOwLzg9.svg",
+    "src": "resources/Images/logo/logo-icon.svg"
+  },
+  "resources/Images/logo/logo.svg": {
+    "file": "assets/logo-DzL7l-_v.svg",
+    "src": "resources/Images/logo/logo.svg"
+  },
+  "resources/Images/shape/grid-01.svg": {
+    "file": "assets/grid-01-D0PYnUlN.svg",
+    "src": "resources/Images/shape/grid-01.svg"
+  },
+  "resources/Images/user/owner.jpg": {
+    "file": "assets/owner-CKy-dmXj.jpg",
+    "src": "resources/Images/user/owner.jpg"
+  },
+  "resources/css/style.css": {
+    "file": "assets/style-CSZHVTSJ.css",
+    "src": "resources/css/style.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-flqdP4Hp.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "css": [
+      "assets/app-C1blSTXy.css"
+    ],
+    "assets": [
+      "assets/grid-01-D0PYnUlN.svg",
+      "assets/auth-logo-CqhENfDg.svg",
+      "assets/logo-DzL7l-_v.svg",
+      "assets/logo-dark-B0_oIsjz.svg",
+      "assets/logo-icon-PTOwLzg9.svg",
+      "assets/owner-CKy-dmXj.jpg",
+      "assets/fa-brands-400-DFY6gyJh.woff2",
+      "assets/fa-regular-400-DdcaUAxu.woff2",
+      "assets/fa-solid-900-BQpGBb1f.woff2",
+      "assets/fa-v4compatibility-BHaDpj3C.woff2"
+    ]
+  }
+}
