@@ -27,7 +27,7 @@ class UserController extends Controller
             });
         }
 
-        $users = $query->paginate(5)->withQueryString();
+        $users = $query->paginate(25)->withQueryString();
 
         return Inertia::render('User/Index', [
             'users' => $users,

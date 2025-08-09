@@ -48,7 +48,7 @@ class TeamAvailableController extends Controller
             }
         }
 
-        $teamAvailables = $query->latest()->paginate(5)->withQueryString();
+        $teamAvailables = $query->latest()->paginate(25)->withQueryString();
 
         return Inertia::render('TeamAvailable/Index', [
             'teamAvailables' => $teamAvailables,

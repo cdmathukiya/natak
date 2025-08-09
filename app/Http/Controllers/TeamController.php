@@ -28,7 +28,7 @@ class TeamController extends Controller
                 });
         }
 
-        $teams = $query->paginate(5)->withQueryString();
+        $teams = $query->paginate(25)->withQueryString();
 
         return Inertia::render('Team/Index', [
             'teams' => $teams,
