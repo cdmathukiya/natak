@@ -26,7 +26,7 @@
                         </div>
                         <div class="w-full px-2.5 xl:w-1/2">
                             <label for="user_id" class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
-                                Select Team<span class="text-error-500">*</span>
+                                Select User<span class="text-error-500">*</span>
                             </label>
                             <div class="relative z-20 bg-transparent">
                                 <select v-model="form.user_id" id="user_id" class="dark:bg-dark-900 shadow-theme-xs focus:border-brand-300 focus:ring-brand-500/10 dark:focus:border-brand-800 h-11 w-full appearance-none rounded-lg border border-gray-300 bg-transparent bg-none px-4 py-2.5 pr-11 text-sm text-gray-800 placeholder:text-gray-400 focus:ring-3 focus:outline-hidden dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30">
@@ -126,12 +126,12 @@
             </div>
         </div>
     </div>
-    <DeleteAlert 
-        v-if="isDeleted" 
+    <DeleteAlert
+        v-if="isDeleted"
         @confirmDelete="deleteMemberConfirmed"
         @cancelDelete="cancelDelete"
         :title="'Material Delete'"
-        :message="'Are you sure you want to delete this record?'" 
+        :message="'Are you sure you want to delete this record?'"
     />
 </template>
 
