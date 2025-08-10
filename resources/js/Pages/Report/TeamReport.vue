@@ -113,9 +113,10 @@
                                         <tr class="border-t border-gray-100 dark:border-white/[0.05] text-left">
                                             <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300">Sr No</th>
                                             <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300">Spots Name</th>
-                                            <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300">Children</th>
-                                            <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300">Women</th>
-                                            <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300">Men</th>
+                                            <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300 text-end">Children</th>
+                                            <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300 text-end">Women</th>
+                                            <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300 text-end">Men</th>
+                                            <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300 text-end">Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -131,20 +132,36 @@
                                                 </p>
                                             </td>
                                             <td class="p-1 border border-gray-100 dark:border-white/[0.05]">
-                                                <p class="text-gray-700 dark:text-white">
+                                                <p class="text-gray-700 dark:text-white text-end">
                                                     {{ spot.children }}
                                                 </p>
                                             </td>
                                             <td class="p-1 border border-gray-100 dark:border-white/[0.05]">
-                                                <p class="text-gray-700 dark:text-white">
+                                                <p class="text-gray-700 dark:text-white text-end">
                                                     {{ spot.women }}
                                                 </p>
                                             </td>
                                             <td class="p-1 border border-gray-100 dark:border-white/[0.05]">
-                                                <p class="text-gray-700 dark:text-white">
+                                                <p class="text-gray-700 dark:text-white text-end">
                                                     {{ spot.men }}
                                                 </p>
                                             </td>
+                                            <td class="p-1 border border-gray-100 dark:border-white/[0.05] font-semibold text-end">
+                                                <p class="text-gray-800 text-theme-sm dark:text-white">
+                                                    {{ rowTotal(spot) }}
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr class="border-t border-gray-100 dark:border-white/[0.05] text-end">
+                                            <td colspan="2" class="p-1 border border-gray-100 dark:border-white/[0.05] font-semibold">
+                                                <p class="text-gray-800 text-theme-sm dark:text-white text-end">
+                                                    Total
+                                                </p>
+                                            </td>
+                                            <td><strong>{{ teamTotals(teamAvailable).children }}</strong></td>
+                                            <td><strong>{{ teamTotals(teamAvailable).women }}</strong></td>
+                                            <td><strong>{{ teamTotals(teamAvailable).men }}</strong></td>
+                                            <td><strong>{{ teamTotals(teamAvailable).grand }}</strong></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -188,6 +205,9 @@ export default {
             },
         }
     },
+    computed: {
+
+    },
     methods: {
         search() {
             let url = route('teamReport');
@@ -200,6 +220,20 @@ export default {
             if (!dateStr) return '';
             const [year, month, day] = dateStr.split('-');
             return `${day}/${month}/${year}`;
+        },
+        rowTotal(spot) {
+            return Number(spot.women) + Number(spot.men) + Number(spot.children);
+        },
+        teamTotals(team) {
+            const children = team.spots.reduce((sum, s) => sum + Number(s.children), 0);
+            const women = team.spots.reduce((sum, s) => sum + Number(s.women), 0);
+            const men = team.spots.reduce((sum, s) => sum + Number(s.men), 0);
+            return {
+                children,
+                women,
+                men,
+                grand: children + women + men
+            };
         },
         async getTeamDetails() {
             let url = route('get_team_details');
