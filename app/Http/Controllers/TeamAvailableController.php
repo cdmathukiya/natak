@@ -166,14 +166,34 @@ class TeamAvailableController extends Controller
     {
         $inputs = $request->validated();
         $spots = $inputs['spots'];
+        $now = now();
 
-        foreach ($spots as $key => $value) {
-            $spots[$key]['team_available_id'] = $inputs['team_available_id'];
-            $spots[$key]['date'] = $inputs['date'];
-            $spots[$key]['created_at'] = now();
-            $spots[$key]['updated_at'] = now();
+        $newSpots = [];
+        foreach ($spots as $spot) {
+            // Common data for both new and update
+            $commonData = [
+                'team_available_id' => $inputs['team_available_id'],
+                'date'              => $inputs['date'],
+                'spots_name'        => $spot['spots_name'],
+                'children'          => $spot['children'],
+                'women'             => $spot['women'],
+                'men'               => $spot['men'],
+                'updated_at'        => $now,
+            ];
+
+            if (!empty($spot['id'])) {
+                // Update existing
+                TeamSpots::where('id', $spot['id'])->update($commonData);
+            } else {
+                // Insert new
+                $commonData['created_at'] = $now;
+                $newSpots[] = $commonData;
+            }
         }
-        TeamSpots::insert($spots);
+
+        if (!empty($newSpots)) {
+            TeamSpots::insert($newSpots);
+        }
 
         return redirect()->route('team_availables')->with('success', 'Data saved successfully');
     }
