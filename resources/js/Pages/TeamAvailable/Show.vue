@@ -94,51 +94,6 @@
         </div>
     </div>
     <TeamSpotsItem v-if="teamAvailable?.id" :spots="teamAvailable?.spots"  :team-available-id="teamAvailable?.id" :date="teamAvailable?.date" />
-
-    <div class="py-5 px-1 space-y-6 bg-white dark:bg-white/[0.03] border border-gray-200 my-5 rounded-2xl dark:border-gray-800 hidden" v-if="teamAvailable?.spots?.length > 0">
-        <h2 class="text-xl mx-2.5 font-semibold text-gray-800 dark:text-white/90 w-full my-2">Add Team Spots</h2>
-        <table class="min-w-full my-3">
-            <thead>
-                <tr class="border-t border-gray-100 dark:border-white/[0.05] text-left">
-                    <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300">Sr No</th>
-                    <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300">Spots Name</th>
-                    <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300">children</th>
-                    <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300">Women</th>
-                    <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300">Men</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="(spot, index) in teamAvailable.spots" class="border-t border-gray-100 dark:border-white/[0.05]">
-                    <td class="p-1 border border-gray-100 dark:border-white/[0.05] w-1/11">
-                       <input type="hidden" v-model="spot.id">
-                        <p class="text-gray-700 text-theme-sm dark:text-gray-400">
-                            {{ index + 1 }}
-                        </p>
-                    </td>
-                    <td class="p-1 border border-gray-100 dark:border-white/[0.05]">
-                        <p class="text-gray-700 text-theme-sm dark:text-gray-400">
-                           {{ spot.spots_name }}
-                        </p>
-                    </td>
-                    <td class="p-1 border border-gray-100 dark:border-white/[0.05]">
-                        <p class="text-gray-700 text-theme-sm dark:text-gray-400">
-                            {{ spot.children }}
-                        </p>
-                    </td>
-                    <td class="p-1 border border-gray-100 dark:border-white/[0.05]">
-                        <p class="text-gray-700 text-theme-sm dark:text-gray-400">
-                            {{ spot.women }}
-                        </p>
-                    </td>
-                    <td class="p-1 border border-gray-100 dark:border-white/[0.05]">
-                        <p class="text-gray-700 text-theme-sm dark:text-gray-400">
-                           {{ spot.men }}
-                        </p>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
 </template>
 
 <script>

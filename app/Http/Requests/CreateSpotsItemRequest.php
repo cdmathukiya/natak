@@ -24,8 +24,8 @@ class CreateSpotsItemRequest extends FormRequest
         $rules = [
             'team_available_id' => ['required', 'numeric'],
             'date' => ['required'],
-            'spots' => ['required', 'array'],
-            'spots.*' => ['required', 'array'],
+            'spots' => ['nullable', 'array'],
+            'spots.*' => ['nullable', 'array'],
             'spots.*.id' => ['nullable', 'numeric', 'exists:team_spots,id'],
             'spots.*.spots_name' => ['required', 'string', 'max:255'],
             'spots.*.children' => ['required', 'string', 'max:255'],

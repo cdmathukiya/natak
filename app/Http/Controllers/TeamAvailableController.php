@@ -99,7 +99,7 @@ class TeamAvailableController extends Controller
 
         TeamAvailableMember::insert($members);
 
-        return redirect()->route('team_available.edit', $teamAvailable->id)->with('success', 'Data saved successfully');
+        return redirect()->route('team_available.show', $teamAvailable->id)->with('success', 'Data saved successfully');
     }
 
     public function show(TeamAvailable $teamAvailable): Response
@@ -168,20 +168,32 @@ class TeamAvailableController extends Controller
         $spots = $inputs['spots'];
         $now = now();
 
+        // 1. Get all existing spot IDs for this team
+        $existingSpotIds = TeamSpots::where('team_available_id', $inputs['team_available_id'])->pluck('id')->toArray();
+
+        // 2. Get IDs from request
+        $requestSpotIds = array_filter(array_column($spots, 'id'));
+
+        // 3. Find deleted spots
+        $deletedIds = array_diff($existingSpotIds, $requestSpotIds);
+        if (! empty($deletedIds)) {
+            TeamSpots::whereIn('id', $deletedIds)->delete();
+        }
+
         $newSpots = [];
         foreach ($spots as $spot) {
             // Common data for both new and update
             $commonData = [
                 'team_available_id' => $inputs['team_available_id'],
-                'date'              => $inputs['date'],
-                'spots_name'        => $spot['spots_name'],
-                'children'          => $spot['children'],
-                'women'             => $spot['women'],
-                'men'               => $spot['men'],
-                'updated_at'        => $now,
+                'date' => $inputs['date'],
+                'spots_name' => $spot['spots_name'],
+                'children' => $spot['children'],
+                'women' => $spot['women'],
+                'men' => $spot['men'],
+                'updated_at' => $now,
             ];
 
-            if (!empty($spot['id'])) {
+            if (! empty($spot['id'])) {
                 // Update existing
                 TeamSpots::where('id', $spot['id'])->update($commonData);
             } else {
@@ -191,7 +203,7 @@ class TeamAvailableController extends Controller
             }
         }
 
-        if (!empty($newSpots)) {
+        if (! empty($newSpots)) {
             TeamSpots::insert($newSpots);
         }
 

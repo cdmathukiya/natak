@@ -2,108 +2,112 @@
     <h2 class="text-xl mx-2.5 font-semibold text-gray-800 dark:text-white/90 w-full my-5">Add Team Spots</h2>
     <div class="py-5 px-1 space-y-6 bg-white dark:bg-white/[0.03] border border-gray-200 rounded-2xl dark:border-gray-800">
          <form @submit.prevent="submit()" enctype="multipart/form-data">
-             <div class="flex my-3">
-                 <div class="w-full px-2.5 xl:w-1/2">
-                     <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
-                         Spots Name<span class="text-error-500">*</span>
-                     </label>
-                     <input type="text" v-model="addSpots.spots_name" placeholder="Enter Sport Name" min="1" class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
-                     <p v-if="addSpots.errors?.spots_name" class="text-theme-xs text-error-500 mt-1.5">
-                         {{ addSpots.errors.spots_name }}
-                     </p>
-                 </div>
-                 <div class="w-full px-2.5 xl:w-1/2">
-                     <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
-                         children<span class="text-error-500">*</span>
-                     </label>
-                     <input type="text" v-model="addSpots.children" placeholder="Enter children" min="1" class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
-                     <p v-if="addSpots.errors?.children" class="text-theme-xs text-error-500 mt-1.5">
-                         {{ addSpots.errors.children }}
-                     </p>
-                 </div>
-                 <div class="w-full px-2.5 xl:w-1/2">
-                     <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
-                         Women<span class="text-error-500">*</span>
-                     </label>
-                     <input type="text" v-model="addSpots.women" placeholder="Enter women" min="1" class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
-                     <p v-if="addSpots.errors?.women" class="text-theme-xs text-error-500 mt-1.5">
-                         {{ addSpots.errors.women }}
-                     </p>
-                 </div>
-                 <div class="w-full px-2.5 xl:w-1/2">
-                     <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
-                         Men<span class="text-error-500">*</span>
-                     </label>
-                     <input type="text" v-model="addSpots.men" placeholder="Enter Men" min="1" class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
-                     <p v-if="addSpots.errors?.men" class="text-theme-xs text-error-500 mt-1.5">
-                         {{ addSpots.errors.men }}
-                     </p>
-                 </div>
-                 <div class="w-full px-2.5 xl:w-1/2 flex items-end justify-center">
-                     <button type="button" @click="add_Spots" class="w-full gap-2 p-3 text-sm font-medium text-white transition-colors rounded-lg bg-brand-500 hover:bg-brand-600">
-                         Add Team Spots
-                     </button>
-                 </div>
-             </div>
+            <div class="xl:flex my-3">
+                <div class="w-full  px-2.5 xl:w-1/2 my-2 lx:my-0">
+                    <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
+                        Spots Name<span class="text-error-500">*</span>
+                    </label>
+                    <input type="text" v-model="addSpots.spots_name" placeholder="Sport Name" min="1" class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
+                    <p v-if="addSpots.errors?.spots_name" class="text-theme-xs text-error-500 mt-1.5">
+                        {{ addSpots.errors.spots_name }}
+                    </p>
+                </div>
+                <div class="flex my-2 lx:my-0">
+                    <div class="px-2.5 xl:w-1/2 w-1/3">
+                        <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
+                            children<span class="text-error-500">*</span>
+                        </label>
+                        <input type="text" v-model="addSpots.children" placeholder="children" min="1" class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
+                        <p v-if="addSpots.errors?.children" class="text-theme-xs text-error-500 mt-1.5">
+                            {{ addSpots.errors.children }}
+                        </p>
+                    </div>
+                    <div class="w-1/3 px-2.5 xl:w-1/2">
+                        <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
+                            Women<span class="text-error-500">*</span>
+                        </label>
+                        <input type="text" v-model="addSpots.women" placeholder="women" min="1" class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
+                        <p v-if="addSpots.errors?.women" class="text-theme-xs text-error-500 mt-1.5">
+                            {{ addSpots.errors.women }}
+                        </p>
+                    </div>
+                    <div class="w-1/3 px-2.5 xl:w-1/2">
+                        <label class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-400">
+                            Men<span class="text-error-500">*</span>
+                        </label>
+                        <input type="text" v-model="addSpots.men" placeholder="Men" min="1" class="dark:bg-dark-900 h-11 w-full rounded-lg border border-gray-300 bg-transparent px-4 py-2.5 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
+                        <p v-if="addSpots.errors?.men" class="text-theme-xs text-error-500 mt-1.5">
+                            {{ addSpots.errors.men }}
+                        </p>
+                    </div>
+                </div>
+                <div class="w-full px-2.5 xl:w-1/2 flex items-end justify-center my-2 lx:my-0">
+                    <button type="button" @click="add_Spots" class="w-full gap-2 p-3 text-sm font-medium text-white transition-colors rounded-lg bg-brand-500 hover:bg-brand-600">
+                        Add Team Spots
+                    </button>
+                </div>
+            </div>
              <div class="h-px mx-2.5 w-full bg-gray-200 dark:bg-gray-800"></div>
-             <table class="min-w-full my-3 ">
-                 <thead>
-                     <tr class="border-t border-gray-100 dark:border-white/[0.05] text-left">
-                         <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300">Sr No</th>
-                         <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300">Spots Name</th>
-                         <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300">children</th>
-                         <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300">Women</th>
-                         <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300">Men</th>
-                         <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300">Action</th>
-                     </tr>
-                 </thead>
-                 <tbody>
-                     <tr v-for="(spot, index) in form.spots" class="border-t border-gray-100 dark:border-white/[0.05]">
-                         <td class="p-1 border border-gray-100 dark:border-white/[0.05] w-1/11">
-                             <p class="text-gray-700 text-theme-sm dark:text-gray-400">
-                                 {{ index + 1 }}
-                             </p>
-                         </td>
-                         <td class="p-1 border border-gray-100 dark:border-white/[0.05]">
-                             <p class="text-gray-700 text-theme-sm dark:text-gray-400">
-                                 <input type="text" v-model="spot.spots_name" placeholder="Enter spots name" class="dark:bg-dark-900 h-8 w-full rounded-lg border border-gray-300 bg-transparent px-2 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
-                             </p>
-                             <p v-if="form.errors?.[`spot.${index}.spots_name`]" class="text-theme-xs text-error-500 mt-1.5">
-                                 {{ form.errors?.[`spot.${index}.spots_name`] }}
-                             </p>
-                         </td>
-                         <td class="p-1 border border-gray-100 dark:border-white/[0.05]">
-                             <p class="text-gray-700 text-theme-sm dark:text-gray-400">
-                                 <input type="text" v-model="spot.children" placeholder="Enter children" class="dark:bg-dark-900 h-8 w-full rounded-lg border border-gray-300 bg-transparent px-2 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
-                             </p>
-                             <p v-if="form.errors?.[`spot.${index}.children`]" class="text-theme-xs text-error-500 mt-1.5">
-                                 {{ form.errors?.[`spot.${index}.children`] }}
-                             </p>
-                         </td>
-                         <td class="p-1 border border-gray-100 dark:border-white/[0.05]">
-                             <p class="text-gray-700 text-theme-sm dark:text-gray-400">
-                                 <input type="text" v-model="spot.women" placeholder="Enter women" class="dark:bg-dark-900 h-8 w-full rounded-lg border border-gray-300 bg-transparent px-2 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
-                             </p>
-                             <p v-if="form.errors?.[`spot.${index}.women`]" class="text-theme-xs text-error-500 mt-1.5">
-                                 {{ form.errors?.[`spot.${index}.women`] }}
-                             </p>
-                         </td>
-                         <td class="p-1 border border-gray-100 dark:border-white/[0.05]">
-                             <p class="text-gray-700 text-theme-sm dark:text-gray-400">
-                                <input type="text" v-model="spot.men" placeholder="Enter men" class="dark:bg-dark-900 h-8 w-full rounded-lg border border-gray-300 bg-transparent px-2 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
-                             </p>
-                             <p v-if="form.errors?.[`spot.${index}.men`]" class="text-theme-xs text-error-500 mt-1.5">
-                                 {{ form.errors?.[`spot.${index}.men`] }}
-                             </p>
-                         </td>
-                         <td class="p-1 border border-gray-100 dark:border-white/[0.05]">
-                             <button @click.prevent="deleteSpots(index)" type="button" class="text-2xl text-gray-500 hover:text-error-500 dark:text-gray-400 dark:hover:text-error-500 mx-1">
-                                 <i class="fa-solid fa-trash"></i>
-                             </button>
-                         </td>
-                     </tr>
-                 </tbody>
-             </table>
+             <div class="custom-scrollbar max-w-full overflow-x-auto overflow-y-visible px-5 sm:px-6">
+                 <table class="w-full my-3">
+                     <thead>
+                         <tr class="border-t border-gray-100 dark:border-white/[0.05] text-left">
+                             <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300">Sr No</th>
+                             <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300">Spots Name</th>
+                             <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300">children</th>
+                             <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300">Women</th>
+                             <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300">Men</th>
+                             <th class="p-1 border border-gray-100 dark:border-white/[0.05] dark:text-gray-300">Action</th>
+                         </tr>
+                     </thead>
+                     <tbody>
+                         <tr v-for="(spot, index) in form.spots" class="border-t border-gray-100 dark:border-white/[0.05]">
+                             <td class="p-1 border border-gray-100 dark:border-white/[0.05]">
+                                 <p class="text-gray-700 text-theme-sm dark:text-gray-400">
+                                     {{ index + 1 }}
+                                 </p>
+                             </td>
+                             <td class="p-1 border border-gray-100 dark:border-white/[0.05]">
+                                 <p class="text-gray-700 text-theme-sm dark:text-gray-400">
+                                     <input type="text" v-model="spot.spots_name" placeholder="spots name" class="dark:bg-dark-900 h-8  w-[64px] xl:w-full rounded-lg border border-gray-300 bg-transparent px-2 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
+                                 </p>
+                                 <p v-if="form.errors?.[`spot.${index}.spots_name`]" class="text-theme-xs text-error-500 mt-1.5">
+                                     {{ form.errors?.[`spot.${index}.spots_name`] }}
+                                 </p>
+                             </td>
+                             <td class="p-1 border border-gray-100 dark:border-white/[0.05]">
+                                 <p class="text-gray-700 text-theme-sm dark:text-gray-400">
+                                     <input type="text" v-model="spot.children" placeholder="children" class="dark:bg-dark-900 h-8 w-full rounded-lg border border-gray-300 bg-transparent px-2 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
+                                 </p>
+                                 <p v-if="form.errors?.[`spot.${index}.children`]" class="text-theme-xs text-error-500 mt-1.5">
+                                     {{ form.errors?.[`spot.${index}.children`] }}
+                                 </p>
+                             </td>
+                             <td class="p-1 border border-gray-100 dark:border-white/[0.05]">
+                                 <p class="text-gray-700 text-theme-sm dark:text-gray-400">
+                                     <input type="text" v-model="spot.women" placeholder="women" class="dark:bg-dark-900 h-8 w-full rounded-lg border border-gray-300 bg-transparent px-2 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
+                                 </p>
+                                 <p v-if="form.errors?.[`spot.${index}.women`]" class="text-theme-xs text-error-500 mt-1.5">
+                                     {{ form.errors?.[`spot.${index}.women`] }}
+                                 </p>
+                             </td>
+                             <td class="p-1 border border-gray-100 dark:border-white/[0.05]">
+                                 <p class="text-gray-700 text-theme-sm dark:text-gray-400">
+                                    <input type="text" v-model="spot.men" placeholder="men" class="dark:bg-dark-900 h-8 w-[64px] xl:w-full rounded-lg border border-gray-300 bg-transparent px-2 text-sm text-gray-800 shadow-theme-xs placeholder:text-gray-400 focus:border-brand-300 focus:outline-hidden focus:ring-3 focus:ring-brand-500/10 dark:border-gray-700 dark:bg-gray-900 dark:text-white/90 dark:placeholder:text-white/30 dark:focus:border-brand-800">
+                                 </p>
+                                 <p v-if="form.errors?.[`spot.${index}.men`]" class="text-theme-xs text-error-500 mt-1.5">
+                                     {{ form.errors?.[`spot.${index}.men`] }}
+                                 </p>
+                             </td>
+                             <td class="p-1 border border-gray-100 dark:border-white/[0.05]">
+                                 <button @click.prevent="deleteSpots(index)" type="button" class="text-2xl text-gray-500 hover:text-error-500 dark:text-gray-400 dark:hover:text-error-500 mx-1">
+                                     <i class="fa-solid fa-trash"></i>
+                                 </button>
+                             </td>
+                         </tr>
+                     </tbody>
+                 </table>
+             </div>
              <div class="w-full px-2.5">
                  <p v-if="form.errors && Object.values(form?.errors).length >= 0" class="text-error-500 mt-1.5">
                      {{ Object.values(form.errors)[0] }}

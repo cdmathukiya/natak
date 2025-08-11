@@ -16,8 +16,8 @@ class UserController extends Controller
     public function index(Request $request): Response
     {
         $query = User::query();
-//            ->with('team');
-//            ->whereNot('role', '=', 'admin');
+        //            ->with('team');
+        //            ->whereNot('role', '=', 'admin');
         if ($request->has('search')) {
             $search = $request->search;
             $query->where(function ($subQuery) use ($search) {
