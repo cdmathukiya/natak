@@ -160,7 +160,7 @@ export default {
         } else {
             members = this.members;
         }
-        console.log(members);
+
         return {
             breadcrum: {
                 currentPage: 'Team',

@@ -1,5 +1,6 @@
 import { router, useForm } from "@inertiajs/vue3";
 import { ref } from "vue";
+import * as XLSX from "xlsx";
 
 export default function common() {
     let sortKey = '';
@@ -65,10 +66,121 @@ export default function common() {
         });
     }
 
+    // const exportToExcel = (tableId = "spots-report", filename = "table-data.xlsx") => {
+
+    //     const table = document.getElementById(tableId);
+
+    //     if (!table) {
+    //         console.error(`Table with id "${tableId}" not found`);
+    //         return;
+    //     }
+
+    //     const worksheet = XLSX.utils.table_to_sheet(table);
+    //     const workbook = XLSX.utils.book_new();
+    //     XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+
+    //     // Auto-adjust column widths
+    //     const wscols = [];
+    //     const maxColLengths = {};
+
+    //     // Calculate maximum content length for each column
+    //     XLSX.utils.sheet_to_json(worksheet).forEach(row => {
+    //         Object.keys(row).forEach(col => {
+    //             let val = row[col] == null ? "" : String(row[col]);
+    //             if (/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(val)) {
+    //                 const [day, month, year] = val.split("/").map(Number);
+    //                 val = `${day}-${month}-${year}`;
+    //             }
+    //             console.log(val)
+    //             if (maxColLengths[col] === undefined || val.length > maxColLengths[col]) {
+    //                 maxColLengths[col] = val.length;
+    //             }
+    //         });
+    //     });
+
+    //     // Set column widths (add some padding)
+    //     Object.keys(maxColLengths).forEach(col => {
+    //         wscols.push({ wch: Math.min(Math.max(maxColLengths[col] + 2, 10), 50) });
+    //     });
+        
+    //     worksheet['!cols'] = wscols;
+
+    //     // XLSX.writeFile(workbook, filename);
+    // };
+
+    const exportToExcel = (tableId = "spots-report", filename = "table-data.xlsx") => {
+        const table = document.getElementById(tableId);
+        if (!table) {
+            console.error(`Table with id "${tableId}" not found`);
+            return;
+        }
+
+        const worksheet = XLSX.utils.table_to_sheet(table, { raw: false });
+
+        // Force all date-like values to D-M-YYYY string
+        Object.keys(worksheet).forEach(cellAddr => {
+            if (cellAddr[0] === '!') return; // skip metadata
+            const cell = worksheet[cellAddr];
+            if (!cell || cell.v == null) return;
+
+            let val = cell.v;
+
+            // Detect Excel serial number date
+            if (!isNaN(val) && Number(val) > 40000 && Number(val) < 60000) {
+                const utcDays = Math.floor(val - 25569);
+                const utcValue = utcDays * 86400;
+                const dateInfo = new Date(utcValue * 1000);
+                const day = dateInfo.getUTCDate();
+                const month = dateInfo.getUTCMonth() + 1;
+                const year = dateInfo.getUTCFullYear();
+                cell.v = `${day}-${month}-${year}`;
+                cell.t = "s";
+            }
+            // Detect date strings with slashes (D/M/YYYY or M/D/YYYY)
+            else if (/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(val)) {
+                let [p1, p2, year] = val.split("/").map(Number);
+                const day = p1 > 12 ? p1 : p2;   // pick correct day
+                const month = p1 > 12 ? p2 : p1; // pick correct month
+                cell.v = `${day}-${month}-${year}`;
+                cell.t = "s";
+            }
+            // Detect date strings with dashes (D-M-YYYY or M-D-YYYY)
+            else if (/^\d{1,2}-\d{1,2}-\d{4}$/.test(val)) {
+                let [p1, p2, year] = val.split("-").map(Number);
+                const day = p1 > 12 ? p1 : p2;
+                const month = p1 > 12 ? p2 : p1;
+                cell.v = `${day}-${month}-${year}`;
+                cell.t = "s";
+            }
+        });
+
+        // Auto column width
+        const wscols = [];
+        const maxColLengths = {};
+        XLSX.utils.sheet_to_json(worksheet).forEach(row => {
+            Object.keys(row).forEach(col => {
+                const val = row[col] == null ? "" : String(row[col]);
+                if (maxColLengths[col] === undefined || val.length > maxColLengths[col]) {
+                    maxColLengths[col] = val.length;
+                }
+            });
+        });
+        Object.keys(maxColLengths).forEach(col => {
+            wscols.push({ wch: Math.min(Math.max(maxColLengths[col] + 2, 10), 50) });
+        });
+        worksheet['!cols'] = wscols;
+
+        // Save file
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+        XLSX.writeFile(workbook, filename);
+    };
+
     return {
         sortTable,
         submitCardInquiryForm,
         CardInquiryFrom,
         isFormSubmiting,
+        exportToExcel,
     };
 }

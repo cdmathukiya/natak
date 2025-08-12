@@ -77,14 +77,24 @@
                         <!-- Menu Item User -->
 
                         <!-- Menu Item User -->
-                        <li>
-                            <Link :href="route('teamReport')" class="menu-item group" :class="isActiveRoute(route('teamReport')) ? 'menu-item-active' : 'menu-item-inactive'">
-                                <i class="fa-brands fa-product-hunt text-xl"></i>
-                                <span class="menu-item-text" :class="sidebarToggle ? 'lg:hidden' : ''">
-                                    Team Available Report
-                                </span>
-                            </Link>
-                        </li>
+                        <template v-if="$page.props.auth.user.role == 'admin'">
+                            <li>
+                                <Link :href="route('teamReport')" class="menu-item group" :class="isActiveRoute(route('teamReport')) ? 'menu-item-active' : 'menu-item-inactive'">
+                                    <i class="fa-brands fa-product-hunt text-xl"></i>
+                                    <span class="menu-item-text" :class="sidebarToggle ? 'lg:hidden' : ''">
+                                        Team Available Report
+                                    </span>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link :href="route('spotsReport')" class="menu-item group" :class="isActiveRoute(route('spotsReport')) ? 'menu-item-active' : 'menu-item-inactive'">
+                                    <i class="fa-brands fa-product-hunt text-xl"></i>
+                                    <span class="menu-item-text" :class="sidebarToggle ? 'lg:hidden' : ''">
+                                        Spots Report
+                                    </span>
+                                </Link>
+                            </li>
+                        </template>
                         <!-- Menu Item User -->
                     </ul>
                 </div>

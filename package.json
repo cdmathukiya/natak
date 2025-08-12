@@ -21,6 +21,7 @@
     "dependencies": {
         "@fortawesome/fontawesome-free": "^7.0.0",
         "@inertiajs/vue3": "^2.0.5",
+        "xlsx": "^0.18.5",
         "ziggy": "^2.4.0"
     }
 }

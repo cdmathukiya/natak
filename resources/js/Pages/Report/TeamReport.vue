@@ -158,10 +158,10 @@
                                                     Total
                                                 </p>
                                             </td>
-                                            <td><strong>{{ teamTotals(teamAvailable).children }}</strong></td>
-                                            <td><strong>{{ teamTotals(teamAvailable).women }}</strong></td>
-                                            <td><strong>{{ teamTotals(teamAvailable).men }}</strong></td>
-                                            <td><strong>{{ teamTotals(teamAvailable).grand }}</strong></td>
+                                            <td class="p-1 border border-gray-100 dark:border-white/[0.05] font-semibold text-end"><strong class="text-gray-800 text-theme-sm dark:text-white text-end">{{ teamTotals(teamAvailable).children }}</strong></td>
+                                            <td class="p-1 border border-gray-100 dark:border-white/[0.05] font-semibold text-end"><strong class="text-gray-800 text-theme-sm dark:text-white text-end">{{ teamTotals(teamAvailable).women }}</strong></td>
+                                            <td class="p-1 border border-gray-100 dark:border-white/[0.05] font-semibold text-end"><strong class="text-gray-800 text-theme-sm dark:text-white text-end">{{ teamTotals(teamAvailable).men }}</strong></td>
+                                            <td class="p-1 border border-gray-100 dark:border-white/[0.05] font-semibold text-end"><strong class="text-gray-800 text-theme-sm dark:text-white text-end">{{ teamTotals(teamAvailable).grand }}</strong></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -201,7 +201,7 @@ export default {
             form: {
                 from_date: this.date.from_date || '',
                 to_date: this.date.to_date || '',
-                search: this.date.search || ''
+                team_id: this.date.team_id || '',
             },
         }
     },
@@ -248,7 +248,7 @@ export default {
             } else {
                 this.team = [];
             }
-        },
-    }
+        }, 
+    },
 }
 </script>

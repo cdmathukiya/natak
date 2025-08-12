@@ -41,6 +41,7 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('a_report')->group(function () {
         Route::get('team_report', [ReportController::class, 'teamReport'])->name('teamReport');
+        Route::get('spots_report', [ReportController::class, 'spotsReport'])->name('spotsReport');
     });
 
     Route::prefix('a_users')->group(function () {
